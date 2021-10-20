@@ -1,5 +1,16 @@
 package com.EasyStreet;
 
+/*
+
+1. Видалити зайві пробіли між словами.
+2. Знайти і видрукувати всі вкладення текстової інформації в лапках.
+3. Врахувати, що відкриваючі та закриваючі лапки можуть бути в різних стрічках, а також можуть бути вкладені лапки.
+4. Замінити задані лексеми на найчастіше вживане в тексті слово.
+
+ */
+
+
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -15,12 +26,14 @@ public class Main {
         String contentWithoutExtraSpaces = StringFormatter.deleteExtraSpaces(content);
         System.out.println("Text without extra spaces:");
         System.out.println(contentWithoutExtraSpaces);
+        System.out.println();
 
         LinkedList<String> nestedStrings = StringFormatter.findNestedStrings(contentWithoutExtraSpaces);
         System.out.println("Nested strings: ");
         for (String nestedStr : nestedStrings) {
             System.out.print(nestedStr+"\t");
         }
+        System.out.println();
         System.out.println();
 
         ArrayList<String> tokens = new ArrayList<>();

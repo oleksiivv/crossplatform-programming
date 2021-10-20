@@ -1,5 +1,10 @@
 package com.EasyStreet;
 
+import com.sun.deploy.util.StringUtils;
+
+import java.io.IOException;
+import java.io.StreamTokenizer;
+import java.io.StringReader;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +15,7 @@ public class StringFormatter {
         return string.replaceAll("( +)"," ").trim();
     }
 
-    public static LinkedList<String> findNestedStrings(String string){
+    public static LinkedList<String> findNestedStringsWithRegex(String string){
         LinkedList<String> matches = new LinkedList<>();
         Pattern p = Pattern.compile("\"([^\"]*)\"");
         Matcher m = p.matcher(string);
@@ -26,6 +31,37 @@ public class StringFormatter {
 
         return matches;
     }
+
+    public static LinkedList<String> findNestedStrings(String string){
+        LinkedList<String> matches = new LinkedList<>();
+        char[] line = string.toCharArray();
+
+        char delimeter;
+        for (int i = 0; i < line.length; i++) {
+            if(line[i] == '\"' || line[i] == '\'') {
+                delimeter = line[i];
+                String tmp = "";
+                do {
+                    if(line[i] != delimeter){
+                        tmp += line[i];
+                    }
+                    i++;
+                }while(line[i] != delimeter);
+
+                matches.add(delimeter + tmp + delimeter);
+                LinkedList<String> nested = findNestedStrings(tmp);
+                if(nested != null){
+                    matches.addAll(nested);
+                }
+            }
+        }
+        if(matches.size() == 0){
+            return null;
+        }
+        return matches;
+    }
+
+
     public static String getMostCommonWord(String string){
         String[] splited = string.split(" ");
         Arrays.sort(splited);
