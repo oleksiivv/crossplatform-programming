@@ -1,0 +1,20 @@
+Dune
+650
+scienceFiction
+adults
+Harry Potter 2
+360
+fantasy
+allAges
+Harry Potter 6
+620
+fantasy
+allAges
+The Lost World
+620
+historicalFiction
+adults
+Percy Jackson
+320
+fantasy
+childs
